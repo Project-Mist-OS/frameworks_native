@@ -1138,9 +1138,14 @@ bool SensorService::threadLoop() {
     do {
         ssize_t count = device.poll(mSensorEventBuffer, numEventMax);
         if (count < 0) {
-            if (count == DEAD_OBJECT && device.isReconnecting()) {
-                handleDeviceReconnection(device);
-                continue;
+            if(count == DEAD_OBJECT && device.isReconnecting()) {
+                device.reconnect();
+                // There are no "real" events at this point, but do not skip the rest of the loop
+                // if there are pending runtime events.
+                Mutex::Autolock _l(&mLock);
+                if (mRuntimeSensorEventQueue.empty()) {
+                    continue;
+                }
             } else {
                 ALOGE("sensor poll failed (%s)", strerror(-count));
                 break;
