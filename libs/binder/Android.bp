@@ -378,6 +378,9 @@ cc_library {
             ],
         },
     },
+    lto: {
+        thin: true,
+    },
 
     afdo: true,
 }
