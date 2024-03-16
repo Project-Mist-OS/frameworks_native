@@ -289,6 +289,9 @@ cc_library {
             "frameworks/native/libs/gui",
         ],
     },
+    lto: {
+        thin: true,
+    },
 }
 
 // Use bootstrap version of stats logging library.

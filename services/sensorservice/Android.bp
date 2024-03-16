@@ -88,6 +88,10 @@ cc_library {
         "libpermission",
     ],
 
+    lto: {
+        thin: true,
+    },
+
     afdo: true,
 }
 
