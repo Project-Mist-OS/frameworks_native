@@ -261,7 +261,7 @@ auto DisplayModeController::initiateModeChange(
         }
     }
 
-    ALOGD("%s %s", displayPtr->concatId(__func__).c_str(), to_string(desiredMode).c_str());
+    ALOGV("%s %s", displayPtr->concatId(__func__).c_str(), to_string(desiredMode).c_str());
     displayPtr->pendingModeOpt = std::move(desiredMode);
 
     const auto& mode = *displayPtr->pendingModeOpt->mode.modePtr;
